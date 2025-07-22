@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHIKYUJIN FC KYOTO</title>
+  <style>
+    :root {
+      --primary-color: white;
+      --accent-color: #b5e61d;
+      --bg-color: white;
+      --text-color: white;
+      --card-bg: #f0f0f0;
+      --footer-bg: #222;
+      --footer-text: #ccc;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      padding-top: 90px; /* space for fixed header */
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between; /* logo left, nav right */
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--primary-color);
+      color: var(--accent-color);
+      gap: 1rem;
+      z-index: 999;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      /* Push to right by flex container, so no extra */
+    }
+
+    .logo {
+      height: 150px;
+      width: auto;
+    }
+
+    .site-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--accent-color);
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background: rgba(181, 230, 29, 0.3);
+    }
+
+    /* Hamburger Button - hidden on desktop */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--accent-color);
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      padding: 1rem;
+      align-items: flex-end; /* Keep right aligned vertically */
+    }
+
+    .logo-container {
+      justify-content: flex-end; /* keep right */
+      margin-bottom: 0.5rem;
+      }
+    .logo {
+      height: 80px;
+    }
+
+    .site-title {
+      font-size: 1.8rem;
+      text-align: right;
+    }
+
+      nav {
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+      display: none; /* hidden by default */
+      margin-top: 0.5rem;
+      align-items: center;
+      background: var(--primary-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+
+      nav.show {
+      display: flex;
+      }
+
+      nav a {
+      margin: 0.5rem 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(255 255 255 / 0.1);
+      }
+
+      .menu-toggle {
+      display: block;
+      align-self: flex-end;
+      }
+    }
+    
+    section {
+      padding: 2rem;
+      background: #fff;
+      margin: 1rem 0;
+      color: #000;
+    }
+
+    #home {
+      position: relative;
+      background: 
+      linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+      url('Group photo.jpg') no-repeat center center/cover;
+      color: white;
+      padding: 190px 30px;  /* Increased from 100px */
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+      overflow: hidden;
+    }
+
+
+    .players {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    .player-card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      width: 220px;
+      flex: 0 0 auto;
+      color: black;
+    }
+
+    .player-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 0.5rem;
+      background-color: #ccc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    input, textarea {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background: var(--accent-color); /* bright green */
+      color: #003366; /* dark blue text for contrast */
+      border: none;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(181, 230, 29, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #a3c414; /* slightly darker green on hover */
+      box-shadow: 0 6px 12px rgba(163, 196, 20, 0.6);
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 6px rgba(163, 196, 20, 0.5);
+}
+
+    button:focus {
+      outline: 3px solid #b5e61d;
+      outline-offset: 2px;
+}
+
+    footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="./index_files/logo.png.jpg" alt="Chikyujin FC Kyoto Logo" class="logo" />
+      <h1 class="site-title">CHIKYUJIN FC KYOTO</h1>
+    </div>
+
+    <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#team">Team</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>Welcome to CHIKYUJIN FC KYOTO</h2>
+    <p>From Kyoto to the world — Unity through Futsal.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      Founded in the heart of Kyoto, CHIKYUJIN FC KYOTO unites international and local talent to play competitive,
+      fast-paced futsal. Our club embodies diversity, discipline, and a love for the game.
+    </p>
+  </section>
+
+  <section id="team">
+    <h2>Our Players</h2>
+    <div class="players">
+      <div class="player-card">
+        <img src="./index_files/kumar.png" alt="Player 1" />
+        <h3>Basnet Saugan</h3>
+        <p>Captain • Forward</p>
+      </div>
+      <div class="player-card">
+        <img src="./index_files/Susan.jpg" alt="Player 2" />
+        <h3>Subedi Susan</h3>
+        <p>Mid-Fielder</p>
+      </div>
+      <div class="player-card">
+        <img src="./index_files/Bivek.jpg" alt="Player 3" />
+        <h3>Yadav Bibek</h3>
+        <p>Forward</p>
+      </div>
+      <div class="player-card">
+        <img src="./index_files/Lalit.jpg" alt="Player 4" />
+        <h3>Lama Lalit</h3>
+        <p>Backward</p>
+      </div>
+      <div class="player-card">
+        <img src="index_files/Kimura.png" alt="Player 5" />
+        <h3>Kimura Syunta</h3>
+        <p>Backward</p>
+      </div>
+      <div class="player-card">
+        <img src="index_files/Saameer.png" alt="Player 6" />
+        <h3>Khatiwada Sameer</h3>
+        <p>Keeper</p>
+      </div>
+      <div class="player-card">
+        <img src="index_files/Diwash.jpg" alt="Player 7" />
+        <h3>Shrestha Diwash</h3>
+        <p>Backward</p>
+      </div>
+       <div class="player-card">
+        <img src="index_files/Ganesh.jpg" alt="Player 8" />
+        <h3>Xettri Ganesh</h3>
+        <p>Forward</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2>Upcoming Matches</h2>
+    <ul>
+      <li><strong>August 2, 2025:</strong> Chikyujin FC Kyoto vs Kokusai International</li>
+      <li><strong>August 9, 2025:</strong> Chikyujin FC Kyoto vs Imazoto os</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formsubmit.co/saugan.basnet56@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required="" />
+      <input type="email" name="email" placeholder="Your Email" required="" />
+      <textarea name="message" placeholder="Your Message" required=""></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 CHIKYUJIN FC KYOTO. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
