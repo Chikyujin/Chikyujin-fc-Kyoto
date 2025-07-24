@@ -41,7 +41,6 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      /* Push to right by flex container, so no extra */
     }
 
     .logo {
@@ -89,57 +88,98 @@
 
     /* Mobile styles */
     @media (max-width: 768px) {
-    header {
-      flex-direction: column;
-      padding: 0rem;
-      align-items: flex-end; /* Keep right aligned vertically */
-      margin:auto;
-    }
+      header {
+        flex-direction: column;
+        padding: 0rem;
+        align-items: flex-end;
+        margin: auto;
+      }
 
-    .logo-container {
-      justify-content: flex-end;  /* keep right aligned */
-      margin-left: 50px;  /* shift whole logo + club name to the right */
-    }
+      .logo-container {
+        justify-content: flex-end;
+        margin-left: 50px;
+      }
 
-    .logo {
-      height: 120px;
-    }
+      .logo {
+        height: 120px;
+      }
 
-    .site-title {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-right: 5px;
-    }
+      .site-title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-right: 5px;
+      }
 
       nav {
-      flex-direction: column;
-      width: 100%;
-      max-width: 300px;
-      display: none; /* hidden by default */
-      margin-top: 0.5rem;
-      align-items: center;
-      background: var(--primary-color);
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        position: fixed;
+        top: 90px;
+        right: 10px;
+        width: 280px;
+        max-width: 90vw;
+        background: var(--primary-color);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        display: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform-origin: top right;
+        font-weight: 700;
       }
 
       nav.show {
-      display: flex;
+        display: flex;
+        animation: slideIn 0.35s forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        }
       }
 
       nav a {
-      margin: 0.1rem 0;
-      width: %;
-      text-align: center;
-      background: rgba(255 255 255 / 0.1);
+        margin: 0.5rem 0;
+        width: 90%;
+        text-align: center;
+        background: rgba(181, 230, 29, 0.15);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: #003366;
+        box-shadow: 0 2px 8px rgba(181, 230, 29, 0.3);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      nav a:hover {
+        background: var(--accent-color);
+        color: white;
+        box-shadow: 0 4px 12px rgba(181, 230, 29, 0.6);
       }
 
       .menu-toggle {
-      display: block;
-      align-self: flex-end;
+        display: block;
+        align-self: flex-end;
+        margin: 0.5rem 1rem 0 0;
+      }
+
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
     }
-    
+
     section {
       padding: 2rem;
       background: #fff;
@@ -150,17 +190,16 @@
     #home {
       position: relative;
       background: 
-      linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-      url('Group photo.jpg') no-repeat center center/cover;
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url('Group photo.jpg') no-repeat center center/cover;
       color: white;
-      padding: 190px 30px;  /* Increased from 100px */
+      padding: 190px 30px;
       text-align: center;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(2px);
       overflow: hidden;
     }
-
 
     .players {
       display: flex;
@@ -191,6 +230,45 @@
       background-color: #ccc;
     }
 
+    /* Gallery Section */
+    #gallery {
+      padding: 2rem 1rem;
+      background: #fafafa;
+      color: #222;
+      max-width: 1000px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    #gallery h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(181, 230, 29, 0.5);
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -206,8 +284,8 @@
     }
 
     button {
-      background: var(--accent-color); /* bright green */
-      color: #003366; /* dark blue text for contrast */
+      background: var(--accent-color);
+      color: #003366;
       border: none;
       padding: 0.75rem 1.5rem;
       cursor: pointer;
@@ -219,7 +297,7 @@
     }
 
     button:hover {
-      background: #a3c414; /* slightly darker green on hover */
+      background: #a3c414;
       box-shadow: 0 6px 12px rgba(163, 196, 20, 0.6);
       transform: translateY(-2px);
     }
@@ -227,18 +305,51 @@
     button:active {
       transform: translateY(0);
       box-shadow: 0 3px 6px rgba(163, 196, 20, 0.5);
-}
+    }
 
     button:focus {
       outline: 3px solid #b5e61d;
       outline-offset: 2px;
-}
+    }
 
     footer {
       background: var(--footer-bg);
       color: var(--footer-text);
       text-align: center;
       padding: 1rem;
+    }
+
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      cursor: pointer;
+    }
+
+    .lightbox-content {
+      display: block;
+      max-width: 90%;
+      max-height: 80%;
+      margin: 5% auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
@@ -256,6 +367,7 @@
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#team">Team</a>
+      <a href="#gallery">Gallery</a>
       <a href="#schedule">Schedule</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -320,20 +432,32 @@
     </div>
   </section>
 
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="Image1.jpg" alt="Gallery Image 1" />
+      <img src="Image2.jpg" alt="Gallery Image 2" />
+      <img src="Image3.jpg" alt="Gallery Image 3" />
+      <img src="Image4.jpg" alt="Gallery Image 4" />
+      <img src="Image5.jpg" alt="Gallery Image 5" />
+      <img src="Image6.jpg" alt="Gallery Image 6" />
+    </div>
+  </section>
+
   <section id="schedule">
     <h2>Upcoming Matches</h2>
     <ul>
-      <li><strong>July 26, 2025:</strong> Chikyujin FC Kyoto VS Kansai FC</li>
-      <li><strong>August 2, 2025:</strong> Chikyujin FC VS Kokusai International</li>
+      <li><strong>August 2, 2025:</strong> Chikyujin FC Kyoto vs Kokusai International</li>
+      <li><strong>August 9, 2025:</strong> Chikyujin FC Kyoto vs Imazoto os</li>
     </ul>
   </section>
 
   <section id="contact">
     <h2>Contact Us</h2>
     <form action="https://formsubmit.co/saugan.basnet56@gmail.com" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required="" />
-      <input type="email" name="email" placeholder="Your Email" required="" />
-      <textarea name="message" placeholder="Your Message" required=""></textarea>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
       <button type="submit">Send</button>
     </form>
   </section>
@@ -342,13 +466,64 @@
     <p>© 2025 CHIKYUJIN FC KYOTO. All rights reserved.</p>
   </footer>
 
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" class="lightbox-content" alt="Expanded Image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" />
+  </div>
 
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('show');
+  <script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav');
+  const navLinks = document.querySelectorAll('nav a');
+
+  // Toggle nav menu
+  menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+
+  // Auto-hide menu on link click
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('show');
     });
+  });
+
+  // Hide menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (
+      nav.classList.contains('show') &&
+      !nav.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      nav.classList.remove('show');
+    }
+  });
+
+  // Lightbox script
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.querySelector('.lightbox .close');
+  const galleryImages = document.querySelectorAll('.gallery-grid img');
+
+  galleryImages.forEach(img => {
+    img.addEventListener('click', () => {
+      lightbox.style.display = 'block';
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+    });
+  });
+
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightbox.style.display = 'none';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
+  });
   </script>
 </body>
 </html>
