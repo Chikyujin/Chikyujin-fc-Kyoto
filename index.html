@@ -135,12 +135,12 @@
 
       @keyframes slideIn {
         from {
-        opacity: 0;
-        transform: translateY(-10px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+          opacity: 0;
+          transform: translateY(-10px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
         }
       }
 
@@ -166,17 +166,6 @@
         display: block;
         align-self: flex-end;
         margin: 0.5rem 1rem 0 0;
-      }
-
-      @keyframes slideIn {
-        0% {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
       }
     }
 
@@ -318,6 +307,82 @@
       text-align: center;
       padding: 1rem;
     }
+    .social-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links img {
+      width: 30px;
+      height: 30px;
+      filter: grayscale(100%) brightness(1.2);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links img:hover {
+      filter: none;
+      transform: scale(1.15);
+    }
+
+    /* Sponsors Section */
+    #sponsors {
+      background: #fafafa;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 1200px;
+      color: #000;
+    }
+
+    #sponsors h2 {
+      color: var(--accent-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .sponsor-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sponsor-logos a {
+      display: inline-block;
+      max-width: 180px;
+      transition: transform 0.3s ease;
+    }
+
+    .sponsor-logos a img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .sponsor-logos a:hover {
+      transform: scale(1.05);
+    }
+
+    .sponsor-cta p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .sponsor-cta a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .sponsor-cta a:hover {
+      text-decoration: underline;
+    }
 
     /* Lightbox styles */
     .lightbox {
@@ -369,6 +434,7 @@
       <a href="#team">Team</a>
       <a href="#gallery">Gallery</a>
       <a href="#schedule">Schedule</a>
+      <a href="#sponsors">Sponsors</a> <!-- Added Sponsors here -->
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -447,9 +513,24 @@
   <section id="schedule">
     <h2>Upcoming Matches</h2>
     <ul>
-      <li><strong>August 2, 2025:</strong> Chikyujin FC Kyoto vs Kokusai Inteernational FC</li>
+      <li><strong>August 2, 2025:</strong> Chikyujin FC Kyoto vs Kokusai International FC</li>
       <li><strong>August 9, 2025:</strong> Chikyujin FC Kyoto vs Kansai FC</li>
     </ul>
+  </section>
+
+  <!-- Sponsors Section -->
+  <section id="sponsors">
+    <h2>Our Sponsors</h2>
+    <p>We are grateful to the generous sponsors who support CHIKYUJIN FC KYOTO.</p>
+    <div class="sponsor-logos">
+      <a href="https://sponsor1.com" target="_blank" aria-label="Sponsor 1">
+        <img src="Gorkha%20Durbar.jfif" alt="Sponsor 1 Logo" />
+      </a>
+      <!-- Add more sponsors as needed -->
+    </div>
+    <div class="sponsor-cta">
+      <p>Interested in sponsoring us? <a href="#contact">Contact us</a> to learn more!</p>
+    </div>
   </section>
 
   <section id="contact">
@@ -464,6 +545,11 @@
 
   <footer>
     <p>© 2025 CHIKYUJIN FC KYOTO. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://www.facebook.com/profile.php?id=61565122686015" target="_blank" aria-label="Facebook">
+        <img src="facebook-icon.png" alt="Facebook" />
+      </a>
+    </div>
   </footer>
 
   <!-- Lightbox overlay -->
@@ -473,57 +559,57 @@
   </div>
 
   <script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('nav');
-  const navLinks = document.querySelectorAll('nav a');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav a');
 
-  // Toggle nav menu
-  menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('show');
-  });
-
-  // Auto-hide menu on link click
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('show');
+    // Toggle nav menu
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
     });
-  });
 
-  // Hide menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (
-      nav.classList.contains('show') &&
-      !nav.contains(e.target) &&
-      !menuToggle.contains(e.target)
-    ) {
-      nav.classList.remove('show');
-    }
-  });
-
-  // Lightbox script
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const closeBtn = document.querySelector('.lightbox .close');
-  const galleryImages = document.querySelectorAll('.gallery-grid img');
-
-  galleryImages.forEach(img => {
-    img.addEventListener('click', () => {
-      lightbox.style.display = 'block';
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
+    // Auto-hide menu on link click
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('show');
+      });
     });
-  });
 
-  closeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    lightbox.style.display = 'none';
-  });
+    // Hide menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (
+        nav.classList.contains('show') &&
+        !nav.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        nav.classList.remove('show');
+      }
+    });
 
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
+    // Lightbox script
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox .close');
+    const galleryImages = document.querySelectorAll('.gallery-grid img');
+
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'block';
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       lightbox.style.display = 'none';
-    }
-  });
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
