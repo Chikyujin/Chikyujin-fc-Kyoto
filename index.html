@@ -167,22 +167,21 @@
         align-self: flex-end;
         margin: 0.5rem 1rem 0 0;
       }
+
+      /* Override #home padding for mobile */
+      #home {
+        padding: 150px 20px !important;
+      }
     }
 
-    section {
-      padding: 2rem;
-      background: #fff;
-      margin: 1rem 0;
-      color: #000;
-    }
-
+    /* Desktop #home style with bigger vertical padding */
     #home {
       position: relative;
       background: 
         linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
         url('Group photo.JPEG') no-repeat center center/cover;
       color: white;
-      padding: 150px 20px;
+      padding: 350px 20px; /* larger vertical padding on desktop */
       text-align: center;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -434,7 +433,7 @@
       <a href="#team">Team</a>
       <a href="#gallery">Gallery</a>
       <a href="#schedule">Schedule</a>
-      <a href="#sponsors">Sponsors</a> <!-- Added Sponsors here -->
+      <a href="#sponsors">Sponsors</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -518,7 +517,6 @@
     </ul>
   </section>
 
-  <!-- Sponsors Section -->
   <section id="sponsors">
     <h2>Our Sponsors</h2>
     <p>We are grateful to the generous sponsors who support CHIKYUJIN FC KYOTO.</p>
